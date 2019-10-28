@@ -3,19 +3,19 @@
 -----------------------------------------------------------
 --              ENTIDADES E RELACIONAMENTOS              --
 -----------------------------------------------------------
-DROP TABLE IF EXISTS CLIENTES;                  -- entidade
+DROP TABLE IF EXISTS CARRINHO;           -- relacionamentos
+DROP TABLE IF EXISTS COMPRAS;                   -- entidade
 DROP TABLE IF EXISTS CLIENTE_ADDRESS;           -- entidade
-DROP TABLE IF EXISTS FUNCIONARIO;               -- entidade
+DROP TABLE IF EXISTS CLIENTES;                  -- entidade
 DROP TABLE IF EXISTS ATENDENTE;                 -- entidade
 DROP TABLE IF EXISTS ENTREGADOR;                -- entidade
 DROP TABLE IF EXISTS FUNCIONARIO_ADDRESS;       -- entidade
-DROP TABLE IF EXISTS FORNECEDORES;              -- entidade
+DROP TABLE IF EXISTS FUNCIONARIO;               -- entidade
 DROP TABLE IF EXISTS FORNECEDORES_ADDRESS;      -- entidade
+DROP TABLE IF EXISTS FORNECEDORES;              -- entidade
 DROP TABLE IF EXISTS PRODUTOS;                  -- entidade
 DROP TABLE IF EXISTS CATEGORIA;                 -- entidade
-DROP TABLE IF EXISTS COMPRAS;                   -- entidade
 DROP TABLE IF EXISTS ENTREGA;            -- relacionamentos
-DROP TABLE IF EXISTS CARRINHO;           -- relacionamentos
 DROP TABLE IF EXISTS GET_PRODUTO;        -- relacionamentos
 -----------------------------------------------------------
 --                        TABELAS                        --
@@ -97,10 +97,10 @@ CREATE TABLE PRODUTOS(
 CREATE TABLE COMPRAS(
     id_compra INTEGER PRIMARY KEY,
     data_de_compra DATE,
-    na_loja BIT,
+    modalidade VARCHAR(20),
     preco FLOAT,
     id_cliente INTEGER,
-    FOREIGN KEY(id_cliente)
+    FOREIGN KEY(id_cliente) REFERENCES CLIENTES(id)
 );
 
 CREATE TABLE CARRINHO( -- compras N..N produtos
@@ -108,7 +108,7 @@ CREATE TABLE CARRINHO( -- compras N..N produtos
     id_produto INTEGER,
     item VARCHAR(50),
     qtde INTEGER,
-    preco FLOAT
+    preco FLOAT,
     data_de_compra DATE,
     FOREIGN KEY(id_compra) REFERENCES COMPRAS(id_compra),
     FOREIGN KEY(id_produto) REFERENCES PRODUTOS(codigo),
@@ -140,7 +140,7 @@ CREATE TABLE FORNECEDORES_ADDRESS(
 CREATE TABLE ENTREGA( -- cliente N..N entregador
     id_cliente INTEGER,
     id_funcionario INTEGER,
-    data_de_entrega DATE
+    data_de_entrega DATE,
     FOREIGN KEY(id_cliente) REFERENCES CLIENTES(id),
     FOREIGN KEY(id_funcionario) REFERENCES ENTREGADOR(id_funcionario),
     PRIMARY KEY(id_cliente, id_funcionario)
