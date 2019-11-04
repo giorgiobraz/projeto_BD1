@@ -6,6 +6,8 @@ Implementação de um sistema de papelaria para o projeto final da disciplina de
 
 - Modelo relacional utilizando o MySQL Workbench
 - Frameworks: Flask e Bootstrap 4
+- `pip3 install pymysql`
+- `pip3 install Flask==0.12.2`
 
 ## Criação do ambiente virtual com Virtualenv
 
@@ -33,10 +35,3 @@ Implementação de um sistema de papelaria para o projeto final da disciplina de
 ### Como Desativar seu ambiente virtual
 
 `deactivate`
-
----
-
-### Referências
-
-- [Como Programar em Ambientes Virtuais](https://pythonacademy.com.br/blog/python-e-virtualenv-como-programar-em-ambientes-virtuais)
-- [Tutorial do prof. Rodrigo Hubner](https://github.com/rodrigohubner/PSB)
