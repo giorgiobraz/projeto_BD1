@@ -2,36 +2,41 @@
 
 Implementação de um sistema de papelaria para o projeto final da disciplina de Banco de Dados 1 do curso Bacharelado em Ciência da Computação em 2019/2 (UTFPR-CM).
 
-## Conteúdo do projeto
+## Principais tecnologias utilizadas
 
-- Modelo relacional utilizando o MySQL Workbench
-- Frameworks: Flask e Bootstrap 4
-- `pip3 install pymysql`
-- `pip3 install Flask==0.12.2`
+- Flask
+- PyMySQL
+- Bootstrap
 
-## Criação do ambiente virtual com Virtualenv
+---
 
-### Instalação
+## Crie um ambiente virtual
+
+Primeiro, é preciso instalar uma ferramenta que permite isolar, do sistema operacional, um ambiente Python que contenha apenas os componentes necessários à aplicação. Para isso, vamos prosseguir com a instalação do _virtualenv_[^1]:  
 
 `sudo pip3 install virtualenv`
 
-### Inicializando um ambiente virtual
+Após a instalação, dentro do diretório criado para o projeto, a fim de inicializar o ambiente virtual, execute as instruções abaixo:  
+`mkdir venv && cd venv/`  
+`virtualenv -p python3 .`  
+`cd ..`  
 
-`mkdir <nome_do_diretório> && cd <nome_do_diretório>/`  
-`virtualenv -p python3 .`
+Agora basta ativar o ambiente virtual com o comando abaixo:  
+`source venv/bin/activate`
 
-### Script de Ativação do ambiente virtual
-
-`source bin/activate`
-
-### Criação de arquivo com as dependências do sistema
-
-`pip3 freeze >> requirements.txt`
-
-### Instalação das dependências com o ambiente virtual ativo
-
+Com o ambiente virtual ativo, instale as dependências:  
 `pip3 install -r requiremennts.txt`
 
-### Como Desativar seu ambiente virtual
-
+Para desativar o ambiente virtual, apenas use o comando:  
 `deactivate`
+
+---
+
+## Execute a aplicação
+
+
+
+
+
+
+[^1]: https://pythonacademy.com.br/blog/python-e-virtualenv-como-programar-em-ambientes-virtuais
