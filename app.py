@@ -1,25 +1,25 @@
 from flask import Flask
 from flask import render_template, url_for, request, redirect
+# import connectDatabase
 
 app = Flask(__name__)
 
+class Categorias:
+    def __init__(self, id, nome, descricao):
+        self.id = id
+        self.nome = nome
+        self.descricao = descricao
+
 ##############################################################################
-@app.route('/produtos')
-def produtos():
-    return redirect(url_for('index'))
-
-@app.route('/novo_produto')
-def novo_produto():
-    return redirect(url_for('index'))
-
-
+#                             ROTAS PARA CATEGORIA                           #
+##############################################################################
 @app.route('/categoria')
 def categoria():
-    return redirect(url_for('index'))
-
-@app.route('/nova_categoria')
-def nova_categoria():
-    return redirect(url_for('index'))
+    cat1 = Categorias(123, 'Artes', 'randon text1')
+    cat2 = Categorias(213, 'Games', 'randon text2')
+    cat3 = Categorias(321, 'Filmes', 'randon text3')
+    lista = [cat1,cat2,cat3]
+    return render_template('homepage.html', titulo='Categorias', Categorias=lista)
 
 
 app.run(debug=True)
