@@ -23,7 +23,7 @@ def exibir():
     return render_template('homepage.html', titulo='Categorias', Categorias=lista)
 
 # ------------------------------- ADICIONAR -------------------------------- #
-@app.route('/categoria', methods=['POST',])
+@app.route('/categoria', methods=['POST',]) # ESTÁTICO !!!
 def adicionar():
     id = request.form['id']
     nome = request.form['nome']
