@@ -1,4 +1,7 @@
--- CREATE DATABASE PAPELARIA;
+DROP DATABASE IF EXISTS PAPELARIA;
+CREATE DATABASE PAPELARIA;
+USE PAPELARIA;
+
 
 -----------------------------------------------------------
 --              ENTIDADES E RELACIONAMENTOS              --
@@ -85,7 +88,7 @@ CREATE TABLE CATEGORIA(
 );
 
 CREATE TABLE PRODUTOS(
-    codigo INTEGER PRIMARY KEY,
+    codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50),
     descricao VARCHAR(500),
     qtde INTEGER,
@@ -153,3 +156,5 @@ CREATE TABLE GET_PRODUTO( -- produtos N..N fornecedores
     FOREIGN KEY(id_produto) REFERENCES PRODUTOS(codigo),
     PRIMARY KEY(id_fornecedores, id_produto)
 );
+
+insert into CATEGORIA(nome, descricao) values('Livros', 'bla bla bla'), ('Escritório', 'bla bla bla'), ('Papelaria', 'bla bla bla')
