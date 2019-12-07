@@ -17,12 +17,23 @@
 
 <!---------------------------------------------------------------------------->
 <script type="text/javascript">
+	function save_edit_values(id, nome, descricao){
+				$('#edit_id').val(id)
+				$('#edit_nome').val(nome)
+				$('#edit_descricao').val(descricao)
+			}
+
+			function delete_values(id){
+				$('#delete_id').remove(id)
+			}
+
 	$(document).ready(function(){
 		// Activate tooltip
 		$('[data-toggle="tooltip"]').tooltip();
 		
 		// Select/Deselect checkboxes
 		var checkbox = $('table tbody input[type="checkbox"]');
+
 		$("#selectAll").click(function(){
 			if(this.checked){
 				checkbox.each(function(){
@@ -86,8 +97,9 @@
                         <td>{{ categoria[1] }}</td>
 						<td>{{ categoria[2] }}</td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							<a href="#editEmployeeModal" onclick="save_edit_values('{{ categoria[0] }}','{{ categoria[1] }}','{{ categoria[2] }}')"
+							class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" onclik="delete_values('{{ categoria[0] }}')" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 				{% endfor %}
@@ -138,19 +150,20 @@
 	<div id="editEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="/categoria" method="POST">
+				<form action="{{ url_for('editar') }}" method="POST">
 					<div class="modal-header">						
 						<h4 class="modal-title">Editar Categoria</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
+						<input type="text" id="edit_id" name="id" class="form-control" value="id" required style="visibility: hidden;">
 						<div class="form-group">
 							<label for="nome">Nome</label>
-							<input type="text" id="nome" name="update" class="form-control" value="nome" required>
+							<input type="text" id="edit_nome" name="nome" class="form-control" value="nome" required>
 						</div>
 						<div class="form-group">
 							<label for="descricao">Descrição</label>
-							<textarea class="form-control" id="descricao" name="descricao" value="descricao" required></textarea>
+							<textarea class="form-control" id="edit_descricao" name="descricao" value="descricao" required></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -165,12 +178,12 @@
 	<div id="deleteEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="{{ url_for('deletar') }}" method="POST">
 					<div class="modal-header">						
 						<h4 class="modal-title">Excluir Categoria</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<input type="text" id="delete_id" name="id" class="form-control" value="id" required style="visibility: hidden;">
+					<div class="modal-body">
 						<p>Tem certeza de que deseja excluir esse dado?</p>
 						<p class="text-warning"><small>Essa ação não pode ser desfeita!.</small></p>
 					</div>

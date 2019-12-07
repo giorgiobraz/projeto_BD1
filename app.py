@@ -25,63 +25,46 @@ def adicionar():
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 # Editar categoria
-@app.route('/categoria', methods=['POST',])
+@app.route('/atualizarcategoria', methods=['POST',])
 def editar():
-    id = request.args.get('id')
+    id = request.form['id']
     nome = request.form['nome']
     descricao = request.form['descricao']
     update = sql.edit_nome_categoria(id, nome, descricao)
     results = sql.get_all_categoria()
+    print("MEU ID EDITAR: ")
+    print(id)
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 
 # Deletar categoria
-@app.route('/categoria')
+@app.route('/categoriadelete', methods=['POST',])
 def deletar():
-    pass
+    id = request.form['id']
+    rm = sql.rm_categoria(id=id)
+    results = sql.get_all_categoria()
+    print("MEU ID: ")
+    print(id)
+    return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
+
+app.run(debug=True)
 
 ###################################################################################
 # 								    CRUD PRODUTOS
 ###################################################################################
 
-# Exibir produtos
-@app.route('/produto')
-def exibir():
-    results = sql.get_all_produtos()
-    return render_template('produtos.html', titulo='Produtos', Produtos=results)
+# # Exibir produtos
+# @app.route('/produto')
 
 
-# Adicionar produto
-@app.route('/produto', methods=['POST',])
-def adicionar():
-    nome = request.form['nome']
-    descricao = request.form['descricao']
-    qtde = request.form['qtde']
-    secao = request.form['secao']
-    id_categoria = request.form['id_categoria']
-    add = sql.novo_produto(nome, descricao, qtde, secao, id_categoria)
-    results = sql.get_all_produtos()
-    return render_template('produtos.html', titulo='Produtos', Produtos=results)
+# # Adicionar produto
+# @app.route('/produto', methods=['POST',])
 
 
-# Editar produto
-@app.route('/produto', methods=['POST',])
-def editar():
-    id = request.args.get('id')
-    nome = request.form['nome']
-    descricao = request.form['descricao']
-    qtde = request.form['qtde']
-    secao = request.form['secao']
-    id_categoria = request.form['id_categoria']
-    update = sql.edit_nome_produto(id, nome, descricao)
-    results = sql.get_all_produtos()
-    return render_template('produtos.html', titulo='Produtos', Produtos=results)
+# # Editar produto
+# @app.route('/produto', methods=['POST',])
 
 
-# Deletar produto
-@app.route('/produto')
-def deletar():
-    pass
-
-app.run(debug=True)
+# # Deletar produto
+# @app.route('/produto')
