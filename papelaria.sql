@@ -157,4 +157,4 @@ CREATE TABLE GET_PRODUTO( -- produtos N..N fornecedores
     PRIMARY KEY(id_fornecedores, id_produto)
 );
 
-insert into CATEGORIA(nome, descricao) values('Livros', 'bla bla bla'), ('Escritório', 'bla bla bla'), ('Papelaria', 'bla bla bla')
+insert into CATEGORIA(nome, descricao) values('Livros', 'bla bla bla'), ('Escritório', 'bla bla bla'), ('Papelaria', 'bla bla bla'),('Estojos', 'bla bla bla')

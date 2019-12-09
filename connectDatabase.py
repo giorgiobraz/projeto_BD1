@@ -8,7 +8,7 @@ class Categorias:
 
 # ------------------- Estabelece Conexao ------------------- #
 	def estabelece_conexao(self, database="papelaria"):
-		return pymysql.connect(host="localhost", user='novousuario', password='password', db=database)
+		return pymysql.connect(host="localhost", user='root', password='password', db=database)
 
 # ------------------------- Create ------------------------- #
 	def nova_categoria(self, nome, descricao):
