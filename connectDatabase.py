@@ -1,16 +1,20 @@
 import pymysql
 
-# ------------------------ Entidades ----------------------- #
+###################################################################################
+# 								    CRUD CATEGORIAS
+###################################################################################
 class Categorias:
 	def __init__(self, nome, descricao):
 		self.nome = nome
 		self.descricao = descricao
 
-# ------------------- Estabelece Conexao ------------------- #
+
+# Estabelece conexao Categoria
+
 	def estabelece_conexao(self, database="papelaria"):
 		return pymysql.connect(host="localhost", user='root', password='password', db=database)
 
-# ------------------------- Create ------------------------- #
+# Create Categoria
 	def nova_categoria(self, nome, descricao):
 		connection = self.estabelece_conexao()
 
@@ -24,13 +28,12 @@ class Categorias:
 					connection.commit()
 					return True
 		except Exception as e:
-	# Sua exceção tá generica.. pode ocorrer erros na hr de inserir e a mensagem será sobre a conexão #################################333
 			print('Não foi possível estabelecer conexao',e)
 			return False
 		finally:
 			connection.close()
 
-# ------------------------- Select ------------------------- #
+# Select Categoria
 	def get_all_categoria(self):
 		connection = self.estabelece_conexao()
 		
@@ -43,18 +46,18 @@ class Categorias:
 				cursor.execute(query)
 				return cursor.fetchall()
 		except Exception as e:
-	# vc podia retornar alguma coisa pra indicar que a query foi falha... ou dar um raise em exceção ##########################################
 			print(e)
 		finally:
 			connection.close()
 
-# ------------------------- Update ------------------------- #
+
+# Update Categoria
 	def edit_nome_categoria(self, id, nome, descricao):
 		connection = self.estabelece_conexao()
 		try:
-			query = "update CATEGORIA set nome = %s where id = %s;"
+			query = "update CATEGORIA set nome=%s, descricao=%s WHERE id=%s;"
 			with connection.cursor() as cursor:
-				cursor.execute(query, (nome, id))
+				cursor.execute(query, (nome, descricao, id))
 				connection.commit()
 				return True
 		except Exception as e:
@@ -63,7 +66,9 @@ class Categorias:
 		finally:
 			connection.close()
 
-# ------------------------- Delete ------------------------- #
+
+# Delete Categoria 
+
 	def rm_categoria(self, id):
 		connection = self.estabelece_conexao()
 		try:
@@ -76,3 +81,90 @@ class Categorias:
 			return False
 		finally:
 			connection.close()
+
+
+###################################################################################
+# 								 	 CRUD PRODUTOS
+###################################################################################
+# class Produtos:
+# 	def __init__(self, nome, descricao, qtde, secao, id_categoria):
+# 		self.nome = nome
+# 		self.descricao = descricao
+# 		self.descricao = descricao
+# 		self.qtde = qtde
+# 		self.secao = secao
+# 		self.id_categoria = id_categoria
+
+# # Estabelece conexao Produtos
+# 	def estabelece_conexao(self, database="papelaria"):
+# 		return pymysql.connect(host="localhost", user='novousuario', password='password', db=database)
+
+
+# # Create Produtos
+# 	def novo_produto(self, nome, descricao, qtde, secao, id_categoria):
+# 		connection = self.estabelece_conexao()
+
+# 		if not connection.open:
+# 			return False
+# 		try:
+# 			query = "insert into PRODUTOS(nome, descricao, qtde, secao, id_categoria) values(%s, %s, %s, %s, %s);"
+
+# 			with connection.cursor() as cursor:
+# 					cursor.execute(query, (nome, descricao, qtde, secao, id_categoria))
+# 					connection.commit()
+# 					return True
+# 		except Exception as e:
+# 			print('Não foi possível estabelecer conexao',e)
+# 			return False
+# 		finally:
+# 			connection.close()
+
+
+# # Select Produtos
+# 	def get_all_produtos(self):
+# 		connection = self.estabelece_conexao()
+		
+# 		if not connection.open:
+# 			print('conexao !open')
+		
+# 		try:
+# 			with connection.cursor() as cursor:
+# 				query = "select * from PRODUTOS"
+# 				cursor.execute(query)
+# 				return cursor.fetchall()
+# 		except Exception as e:
+# 			print(e)
+# 		finally:
+# 			connection.close()
+
+
+# # Update Produtos
+# 	def edit_nome_produto(self, id, nome, descricao, qtde, secao, id_categoria):
+# 		connection = self.estabelece_conexao()
+# 		try:
+# 			query = "update PRODUTOS set nome=%s descricao=%s qtde=%s secao=%s id_categoria=%s WHERE id=%s;"
+# 			with connection.cursor() as cursor:
+# 				cursor.execute(query, (nome, descricao, qtde, secao, id_categoria, id))
+# 				connection.commit()
+# 				return True
+# 		except Exception as e:
+# 			print(e)
+# 			return False
+# 		finally:
+# 			connection.close()
+
+
+# # Delete Produtos 
+
+# 	def rm_produto(self, id):
+# 		connection = self.estabelece_conexao()
+# 		try:
+# 			query = "delete from PRODUTOS where id = %s;"
+# 			with connection.cursor() as cursor:
+# 				cursor.execute(query, id)
+# 				connection.commit()
+# 				return True
+# 		except Exception as e:
+# 			return False
+# 		finally:
+# 			connection.close()

@@ -5,35 +5,66 @@ from connectDatabase import Categorias
 app = Flask(__name__)
 sql = Categorias(None, None)
 
-##############################################################################
-#                          CRUD SIMPLES >> CATEGORIAS                        #
-##############################################################################
+###################################################################################
+# 								    CRUD CATEGORIAS
+###################################################################################
 
-# --------------------------------- EXIBIR --------------------------------- #
+# Exibir categoria
 @app.route('/categoria')
 def exibir():
     results = sql.get_all_categoria()
-    print(results)
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
-# ------------------------------- ADICIONAR -------------------------------- #
+# Adicionar categoria
 @app.route('/categoria', methods=['POST',])
 def adicionar():
-    id = request.form['id']
     nome = request.form['nome']
     descricao = request.form['descricao']
-    nova_categoria = sql.nova_categoria(nome, descricao)
+    add = sql.nova_categoria(nome, descricao)
     results = sql.get_all_categoria()
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
-# --------------------------------- EDITAR --------------------------------- #
-@app.route('/categoria')
+# Editar categoria
+@app.route('/atualizarcategoria', methods=['POST',])
 def editar():
-    pass
+    id = request.form['id']
+    nome = request.form['nome']
+    descricao = request.form['descricao']
+    update = sql.edit_nome_categoria(id, nome, descricao)
+    results = sql.get_all_categoria()
+    print("MEU ID EDITAR: ")
+    print(id)
+    return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
-# --------------------------------- DELETAR -------------------------------- #
-@app.route('/categoria')
+
+# Deletar categoria
+@app.route('/categoriadelete', methods=['POST',])
 def deletar():
-    pass
+    id = request.form['id']
+    rm = sql.rm_categoria(id=id)
+    results = sql.get_all_categoria()
+    print("MEU ID: ")
+    print(id)
+    return render_template('homepage.html', titulo='Categorias', Categorias=results)
+
 
 app.run(debug=True)
+
+###################################################################################
+# 								    CRUD PRODUTOS
+###################################################################################
+
+# # Exibir produtos
+# @app.route('/produto')
+
+
+# # Adicionar produto
+# @app.route('/produto', methods=['POST',])
+
+
+# # Editar produto
+# @app.route('/produto', methods=['POST',])
+
+
+# # Deletar produto
+# @app.route('/produto')
