@@ -54,17 +54,5 @@ app.run(debug=True)
 # 								    CRUD PRODUTOS
 ###################################################################################
 
-# # Exibir produtos
-# @app.route('/produto')
-
-
-# # Adicionar produto
-# @app.route('/produto', methods=['POST',])
-
-
-# # Editar produto
-# @app.route('/produto', methods=['POST',])
-
-
-# # Deletar produto
-# @app.route('/produto')
+# Exibir produtos
+@app.route('/produto')
