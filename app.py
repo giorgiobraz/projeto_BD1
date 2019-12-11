@@ -87,6 +87,7 @@ def editar_produto():
 @app.route('/produtodelete', methods=['POST',])
 def deletar_produto():
     id = request.form['id']
+    print(id)
     rm = sql2.rm_produto(id=id)
     results = sql2.get_all_produtos()
     return render_template('produtos.html', titulo='Produtos', Produtos=results)

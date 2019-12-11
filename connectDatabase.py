@@ -174,7 +174,7 @@ class Produtos:
 	def rm_produto(self, id):
 		connection = self.estabelece_conexao()
 		try:
-			query = "delete from PRODUTOS where id = %s;"
+			query = "delete from PRODUTOS where codigo = %s;"
 			with connection.cursor() as cursor:
 				cursor.execute(query, id)
 				connection.commit()
