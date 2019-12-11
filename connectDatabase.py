@@ -136,12 +136,29 @@ class Produtos:
 		finally:
 			connection.close()
 
+# # Select nome categorias
+# 	def get_nome_categorias(self, id_categoria):
+# 		connection = self.estabelece_conexao()
+		
+# 		if not connection.open:
+# 			print('conexao !open')
+		
+# 		try:
+# 			with connection.cursor() as cursor:
+# 				query = "select nome from CATEGORIA where id=%s;"
+# 				cursor.execute(query)
+# 				return cursor.fetchall()
+# 		except Exception as e:
+# 			print(e)
+# 		finally:
+# 			connection.close()
+
 
 # Update Produtos
 	def edit_nome_produto(self, id, nome, descricao, qtde, secao, id_categoria):
 		connection = self.estabelece_conexao()
 		try:
-			query = "update PRODUTOS set nome=%s descricao=%s qtde=%s secao=%s id_categoria=%s WHERE id=%s;"
+			query = "update PRODUTOS set nome=%s, descricao=%s, qtde=%s, secao=%s, id_categoria=%s WHERE codigo=%s;"
 			with connection.cursor() as cursor:
 				cursor.execute(query, (nome, descricao, qtde, secao, id_categoria, id))
 				connection.commit()

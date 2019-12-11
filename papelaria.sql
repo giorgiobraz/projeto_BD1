@@ -94,7 +94,7 @@ CREATE TABLE PRODUTOS(
     descricao VARCHAR(500),
     qtde INTEGER,
     secao VARCHAR(50),
-    id_categoria INTEGER,
+    id_categoria INTEGER NOT NULL,
     CONSTRAINT FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id)
 );
 
@@ -158,6 +158,5 @@ CREATE TABLE GET_PRODUTO( -- produtos N..N fornecedores
     PRIMARY KEY(id_fornecedores, id_produto)
 );
 
-insert into CATEGORIA(nome, descricao) values('Livros', 'bla bla bla'), ('Escritório', 'bla bla bla'), ('Papelaria', 'bla bla bla')
-
-insert into PRODUTOS(nome, descricao, qtde, secao, id_categoria) values('Livros', 'bla bla bla', '3', 'qualquer', '1')
+insert into CATEGORIA(nome, descricao) values('Livros', 'novo 1'), ('Escritório', 'novo 2'), ('Papelaria', 'novo 3');
+insert into PRODUTOS(nome, descricao, qtde, secao, id_categoria) values('Livros', 'bla bla bla', '3', 'qualquer', 1);

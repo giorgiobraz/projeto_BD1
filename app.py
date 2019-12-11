@@ -61,8 +61,42 @@ def exibir_produtos():
     results = sql2.get_all_produtos()
     return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
+# Adicionar produtos
+@app.route('/produto', methods=['POST',])
+def adicionar_produto():
+    nome = request.form['nome']
+    descricao = request.form['descricao']
+    qtde = request.form['qtde']
+    secao = request.form['secao']
+    categoria  = request.form['categoria']
+    add = sql2.novo_produto(nome, descricao, qtde, secao, categoria)
+    results = sql2.get_all_produtos()
+    return render_template('produtos.html', titulo='Produtos', Produtos=results)
+
+# Editar produtos
+@app.route('/atualizarproduto', methods=['POST',])
+def editar_produto():
+    id = request.form['id']
+    nome = request.form['nome']
+    descricao = request.form['descricao']
+    qtde = request.form['qtde']
+    secao = request.form['secao']
+    categoria  = request.form['categoria']
+    update = sql2.edit_nome_produto(id, nome, descricao, qtde, secao, categoria)
+    results = sql2.get_all_produtos()
+    print("MEU ID EDITAR: ")
+    print(id)
+    return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
 
-
+# Deletar produtos
+@app.route('/produtodelete', methods=['POST',])
+def deletar_produto():
+    id = request.form['id']
+    rm = sql2.rm_produto(id=id)
+    results = sql2.get_all_produtos()
+    print("MEU ID: ")
+    print(id)
+    return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
 app.run(debug=True)
