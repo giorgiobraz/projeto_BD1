@@ -33,8 +33,6 @@ def editar():
     descricao = request.form['descricao']
     update = sql.edit_nome_categoria(id, nome, descricao)
     results = sql.get_all_categoria()
-    print("MEU ID EDITAR: ")
-    print(id)
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 
@@ -44,8 +42,6 @@ def deletar():
     id = request.form['id']
     rm = sql.rm_categoria(id=id)
     results = sql.get_all_categoria()
-    print("MEU ID: ")
-    print(id)
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 
@@ -84,8 +80,6 @@ def editar_produto():
     categoria  = request.form['categoria']
     update = sql2.edit_nome_produto(id, nome, descricao, qtde, secao, categoria)
     results = sql2.get_all_produtos()
-    print("MEU ID EDITAR: ")
-    print(id)
     return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
 
@@ -95,8 +89,6 @@ def deletar_produto():
     id = request.form['id']
     rm = sql2.rm_produto(id=id)
     results = sql2.get_all_produtos()
-    print("MEU ID: ")
-    print(id)
     return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
 app.run(debug=True)
