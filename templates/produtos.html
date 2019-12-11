@@ -17,12 +17,26 @@
 
 <!---------------------------------------------------------------------------->
 <script type="text/javascript">
+	function edit_values(id, nome, descricao, qtde, secao, id_categoria){
+				$('#edit_id').val(id)
+				$('#edit_nome').val(nome)
+				$('#edit_descricao').val(descricao)
+				$('#edit_qtde').val(qtde)
+				$('#edit_secao').val(secao)
+				$('#edit_id_categoria').val(id_categoria)
+			}
+
+			function delete_values_cat(id){
+				$('#delete_id').val(id)
+			}
+
 	$(document).ready(function(){
 		// Activate tooltip
 		$('[data-toggle="tooltip"]').tooltip();
 		
 		// Select/Deselect checkboxes
 		var checkbox = $('table tbody input[type="checkbox"]');
+
 		$("#selectAll").click(function(){
 			if(this.checked){
 				checkbox.each(function(){
@@ -54,7 +68,7 @@
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Novo Produto</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Excluir</span></a>						
+						<!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Excluir</span></a> -->
 					</div>
                 </div>
             </div>
@@ -92,58 +106,58 @@
 						<td>{{ produto[4] }}</td>
 						<td>{{ produto[5] }}</td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							<a href="#editEmployeeModal" onclick="edit_values('{{ produto[0] }}','{{ produto[1] }}','{{ produto[2] }}','{{ produto[3] }}','{{ produto[4] }}','{{ produto[5] }}')"
+							class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+							<a href="#deleteEmployeeModal" onclick="delete_values_cat('{{ produto[0] }}')" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 				{% endfor %}
 				</tbody>
             </table>
-			<div class="clearfix">
+			<!-- <div class="clearfix">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
                     <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
                     <li class="page-item"><a href="#" class="page-link">4</a></li>
                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                     <li class="page-item"><a href="#" class="page-link">Next</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 	<!-- Add Modal HTML -->
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Add Produto</h4>
+				<form action="{{ url_for('adicionar_produto') }}" method="POST">
+					<div class="modal-header">
+						<h4 class="modal-title">Nova Produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">
 						<div class="form-group">
-							<div class="form-group">
-								<label for="nome">Nome</label>
-								<input type="text" id="nome" name="nome" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label for="descricao">Descrição</label>
-								<textarea class="form-control" id="descricao" name="descricao" required></textarea>
-							</div>
-							<div class="form-group">
-								<label for="descricao">Quantidade</label>
-								<input type="text" class="form-control" id="descricao" name="descricao" required>
-							</div>
-							<div class="form-group">
-								<label for="descricao">Seção</label>
-								<input type="text" class="form-control" id="descricao" name="descricao" required>
-							</div>
-							<div class="form-group">
-								<label for="descricao">Categoria</label>
-								<input type="text" class="form-control" id="descricao" name="descricao" required>
-							</div>
+							<label for="nome">Nome</label>
+							<input type="text" id="nome" name="nome" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="descricao">Descrição</label>
+							<textarea class="form-control" id="descricao" name="descricao" required></textarea>
+						</div>
+						<div class="form-group">
+							<label for="qtde">Quantidade</label>
+							<input type="text" id="qtde" name="qtde" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="secao">Seção</label>
+							<input type="text" id="secao" name="secao" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="categoria">Categoria</label>
+							<textarea class="form-control" id="categoria" name="categoria" required></textarea>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -157,20 +171,34 @@
 	<div id="editEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="{{ url_for('editar_produto') }}" method="POST">
 					<div class="modal-header">						
 						<h4 class="modal-title">Editar Produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body">					
+						<input type="text" id="edit_id" name="id" class="form-control" value="id" required style="visibility: hidden;">
 						<div class="form-group">
-							<label for="nome">Nome</label>
-							<input type="text" id="nome" name="nome" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label for="descricao">Descrição</label>
-							<textarea class="form-control" id="descricao" name="descricao" required></textarea>
-						</div>
+							<div class="form-group">
+								<label for="nome">Nome</label>
+								<input type="text" id="edit_nome" name="nome" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label for="descricao">Descrição</label>
+								<textarea class="form-control" id="edit_descricao" name="descricao" required></textarea>
+							</div>
+							<div class="form-group">
+								<label for="qtde">Quantidade</label>
+								<input type="text" id="edit_qtde" name="qtde" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label for="secao">Seção</label>
+								<input type="text" id="edit_secao" name="secao" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label for="categoria">Categoria</label>
+								<textarea class="form-control" id="edit_id_categoria" name="categoria" required></textarea>
+							</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -184,12 +212,12 @@
 	<div id="deleteEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="{{ url_for('deletar_produto') }}" method="POST">
 					<div class="modal-header">						
 						<h4 class="modal-title">Excluir Produto</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<input type="text" id="delete_id" name="id" class="form-control" value="id" required style="visibility: hidden;">
+					<div class="modal-body">
 						<p>Tem certeza de que deseja excluir esse dado?</p>
 						<p class="text-warning"><small>Essa ação não pode ser desfeita!.</small></p>
 					</div>
@@ -202,4 +230,4 @@
 		</div>
 	</div>
 </body>
-</html>                                		                            
+</html>

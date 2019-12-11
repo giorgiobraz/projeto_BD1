@@ -1,10 +1,10 @@
 from flask import Flask
 from flask import render_template, url_for, request, redirect
-#from connectDatabase import Categorias
-from connectDatabase import Produtos
+from connectDatabase import Categorias, Produtos
 
 app = Flask(__name__)
 sql = Categorias(None, None)
+sql2 = Produtos(None, None, None, None, None)
 
 app = Flask(__name__)
 sql = Produtos(None, None, None, None, None)
@@ -36,8 +36,6 @@ def editar():
     descricao = request.form['descricao']
     update = sql.edit_nome_categoria(id, nome, descricao)
     results = sql.get_all_categoria()
-    print("MEU ID EDITAR: ")
-    print(id)
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 
@@ -47,59 +45,53 @@ def deletar():
     id = request.form['id']
     rm = sql.rm_categoria(id=id)
     results = sql.get_all_categoria()
-    print("MEU ID: ")
-    print(id)
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 
-app.run(debug=True)
+
 
 ###################################################################################
 # 								    CRUD PRODUTOS                                 #
 ###################################################################################
 
-# # Exibir produtos
+# Exibir produtos
 @app.route('/produto')
-def exibir():
-    results = sql.get_all_produto()
+def exibir_produtos():
+    results = sql2.get_all_produtos()
     return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
-# # Adicionar produto
+# Adicionar produtos
 @app.route('/produto', methods=['POST',])
-def adicionar():
+def adicionar_produto():
     nome = request.form['nome']
     descricao = request.form['descricao']
-    quantidade = request.form['quantidade']
+    qtde = request.form['qtde']
     secao = request.form['secao']
-    idCategoria = request.form['idCategoria']
-    add = sql.novo_produto(nome, descricao, quantidade, secao, id_categoria)
-    results = sql.get_all_produto()
+    categoria  = request.form['categoria']
+    add = sql2.novo_produto(nome, descricao, qtde, secao, categoria)
+    results = sql2.get_all_produtos()
     return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
-# # Editar produto
-@app.route('/produto', methods=['POST',])
-def editar():
+# Editar produtos
+@app.route('/atualizarproduto', methods=['POST',])
+def editar_produto():
     id = request.form['id']
     nome = request.form['nome']
     descricao = request.form['descricao']
-    quantidade = request.form['quantidade']
+    qtde = request.form['qtde']
     secao = request.form['secao']
-    idCategoria = request.form['idCategoria']
-    update = sql.edit_nome_produto(id, nome, descricao, quantidade, secao, id_categoria)
-    results = sql.get_all_produto()
-    print("MEU ID EDITAR: ")
-    print(id)
+    categoria  = request.form['categoria']
+    update = sql2.edit_nome_produto(id, nome, descricao, qtde, secao, categoria)
+    results = sql2.get_all_produtos()
     return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
-# # Deletar produto
-@app.route('/produto')
-def deletar():
-    id = request.form['id']
-    rm = sql.rm_produto(id=id)
-    results = sql.get_all_produto()
-    print("MEU ID: ")
-    print(id)
-    return render_template('produto.html', titulo='Produtos', Produtos=results)
 
+# Deletar produtos
+@app.route('/produtodelete', methods=['POST',])
+def deletar_produto():
+    id = request.form['id']
+    rm = sql2.rm_produto(id=id)
+    results = sql2.get_all_produtos()
+    return render_template('produtos.html', titulo='Produtos', Produtos=results)
 
 app.run(debug=True)

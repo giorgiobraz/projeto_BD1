@@ -82,9 +82,10 @@ CREATE TABLE CLIENTE_ADDRESS(
 );
 
 CREATE TABLE CATEGORIA(
-    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50),
-    descricao VARCHAR(500)
+    descricao VARCHAR(500),
+    CONSTRAINT PRIMARY KEY(id)
 );
 
 CREATE TABLE PRODUTOS(
@@ -93,8 +94,8 @@ CREATE TABLE PRODUTOS(
     descricao VARCHAR(500),
     qtde INTEGER,
     secao VARCHAR(50),
-    id_categoria INTEGER,
-    FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id)
+    id_categoria INTEGER NOT NULL,
+    CONSTRAINT FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id) ON DELETE CASCADE
 );
 
 CREATE TABLE COMPRAS(
@@ -157,8 +158,5 @@ CREATE TABLE GET_PRODUTO( -- produtos N..N fornecedores
     PRIMARY KEY(id_fornecedores, id_produto)
 );
 
-insert into CATEGORIA(nome, descricao) values('Livros', 'bla bla bla'), ('Escritório', 'bla bla bla'), ('Papelaria', 'bla bla bla'),('Estojos', 'bla bla bla');
-insert into PRODUTOS(nome,descricao,qtde,secao,id_categoria) values ('Bloco de Notas','Diversos',32,'Escritório',2);
-insert into PRODUTOS(nome,descricao,qtde,secao,id_categoria) values ('Caderno','10 materias',25,'Material Escolar',2);
-insert into PRODUTOS(nome,descricao,qtde,secao,id_categoria) values ('Estojo Kiplin','Azul Marinho',8,'Material Escolar',4);
-insert into PRODUTOS(nome,descricao,qtde,secao,id_categoria) values ('O Pequeno Principe','Livro capa mole',18,'Infantil',1);
+insert into CATEGORIA(nome, descricao) values('Livros', 'novo 1'), ('Escritório', 'novo 2'), ('Papelaria', 'novo 3');
+insert into PRODUTOS(nome, descricao, qtde, secao, id_categoria) values('Livros', 'bla bla bla', '3', 'qualquer', 1);
