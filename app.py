@@ -1,9 +1,10 @@
 from flask import Flask
 from flask import render_template, url_for, request, redirect
-from connectDatabase import Categorias
+from connectDatabase import Categorias, Produtos
 
 app = Flask(__name__)
 sql = Categorias(None, None)
+sql2 = Produtos(None, None, None, None, None)
 
 ###################################################################################
 # 								    CRUD CATEGORIAS
@@ -48,7 +49,7 @@ def deletar():
     return render_template('homepage.html', titulo='Categorias', Categorias=results)
 
 
-app.run(debug=True)
+
 
 ###################################################################################
 # 								    CRUD PRODUTOS
@@ -56,3 +57,12 @@ app.run(debug=True)
 
 # Exibir produtos
 @app.route('/produto')
+def exibir_produtos():
+    results = sql2.get_all_produtos()
+    return render_template('produtos.html', titulo='Produtos', Produtos=results)
+
+
+
+
+
+app.run(debug=True)

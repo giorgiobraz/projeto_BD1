@@ -82,9 +82,10 @@ CREATE TABLE CLIENTE_ADDRESS(
 );
 
 CREATE TABLE CATEGORIA(
-    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INTEGER NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50),
-    descricao VARCHAR(500)
+    descricao VARCHAR(500),
+    CONSTRAINT PRIMARY KEY(id)
 );
 
 CREATE TABLE PRODUTOS(
@@ -94,7 +95,7 @@ CREATE TABLE PRODUTOS(
     qtde INTEGER,
     secao VARCHAR(50),
     id_categoria INTEGER,
-    FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id)
+    CONSTRAINT FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id)
 );
 
 CREATE TABLE COMPRAS(
@@ -158,3 +159,5 @@ CREATE TABLE GET_PRODUTO( -- produtos N..N fornecedores
 );
 
 insert into CATEGORIA(nome, descricao) values('Livros', 'bla bla bla'), ('Escritório', 'bla bla bla'), ('Papelaria', 'bla bla bla')
+
+insert into PRODUTOS(nome, descricao, qtde, secao, id_categoria) values('Livros', 'bla bla bla', '3', 'qualquer', '1')
