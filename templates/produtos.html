@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Produtos</title>
+<title>Categorias</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -67,7 +67,7 @@
 						<h2>{{ titulo }}</h2> <!-- titulo dinâmico -->
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Novo Produto</span></a>
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nova Produto</span></a>
 						<!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Excluir</span></a> -->
 					</div>
                 </div>
@@ -108,7 +108,7 @@
                         <td>
 							<a href="#editEmployeeModal" onclick="edit_values('{{ produto[0] }}','{{ produto[1] }}','{{ produto[2] }}','{{ produto[3] }}','{{ produto[4] }}','{{ produto[5] }}')"
 							class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-							<a href="#deleteEmployeeModal" onclick="delete_values_cat('{{ produto[0] }}')" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#deleteEmployeeModal" onclick="delete_values_cat('{{ produto[0] }}')" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 				{% endfor %}
@@ -134,7 +134,7 @@
 			<div class="modal-content">
 				<form action="{{ url_for('adicionar_produto') }}" method="POST">
 					<div class="modal-header">
-						<h4 class="modal-title">Nova Produto</h4>
+						<h4 class="modal-title">Novo Produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -179,26 +179,25 @@
 					<div class="modal-body">					
 						<input type="text" id="edit_id" name="id" class="form-control" value="id" required style="visibility: hidden;">
 						<div class="form-group">
-							<div class="form-group">
-								<label for="nome">Nome</label>
-								<input type="text" id="edit_nome" name="nome" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label for="descricao">Descrição</label>
-								<textarea class="form-control" id="edit_descricao" name="descricao" required></textarea>
-							</div>
-							<div class="form-group">
-								<label for="qtde">Quantidade</label>
-								<input type="text" id="edit_qtde" name="qtde" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label for="secao">Seção</label>
-								<input type="text" id="edit_secao" name="secao" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label for="categoria">Categoria</label>
-								<textarea class="form-control" id="edit_id_categoria" name="categoria" required></textarea>
-							</div>
+							<label for="nome">Nome</label>
+							<input type="text" id="edit_nome" name="nome" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="descricao">Descrição</label>
+							<textarea class="form-control" id="edit_descricao" name="descricao" required></textarea>
+						</div>
+						<div class="form-group">
+							<label for="qtde">Quantidade</label>
+							<input type="text" id="edit_qtde" name="qtde" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="secao">Seção</label>
+							<input type="text" id="edit_secao" name="secao" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="categoria">Categoria</label>
+							<textarea class="form-control" id="edit_id_categoria" name="categoria" required></textarea>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -212,7 +211,7 @@
 	<div id="deleteEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="{{ url_for('deletar_produto') }}" method="POST">
+				<form action="{{ url_for('deletar_produto') }}" method="POST"></form>
 					<div class="modal-header">						
 						<h4 class="modal-title">Excluir Produto</h4>
 					</div>

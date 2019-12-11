@@ -6,9 +6,6 @@ app = Flask(__name__)
 sql = Categorias(None, None)
 sql2 = Produtos(None, None, None, None, None)
 
-app = Flask(__name__)
-sql = Produtos(None, None, None, None, None)
-
 ###################################################################################
 # 								    CRUD CATEGORIAS
 ###################################################################################
